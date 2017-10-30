@@ -2,9 +2,16 @@
   "name": "betfair-client",
   "version": "1.0.0",
   "description": "Connect to betfair and Make Calls to the betfair api",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run build && npm run watch",
+    "build": "npm run build-ts",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve\"",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "serve": "nodemon dist/index.js"
   },
   "keywords": [
     "Betfair",
@@ -14,6 +21,14 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^8.0.47",
+    "@types/superagent": "^3.5.5",
+    "concurrently": "^3.5.0",
     "typescript": "^2.5.3"
+  },
+  "dependencies": {
+    "debug": "^3.1.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "superagent": "^3.8.0"
   }
 }
